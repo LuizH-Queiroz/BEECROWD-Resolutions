@@ -1,11 +1,29 @@
 #include <stdio.h>
 #include <math.h>
 
+
+int EhPrimo(int num){
+    int contador = 0;
+    int i;
+
+    for (i = 1; i <= sqrt(num); i++)
+    {
+        if (num%i == 0){
+            contador++;
+            if (contador == 2){
+                return 0; //O numero nao eh primo
+            }
+        }
+    }
+
+    return 1; //O numero eh primo
+}
+
+
 int main(){
     int nTestes; //Quantidade de casos de teste
     int numero; //Numero que será avaliado
-    int achouDivisor;
-    int i, j;
+    int i;
 
 
     scanf("%d", &nTestes);
@@ -13,25 +31,11 @@ int main(){
     {
         scanf("%d", &numero);
 
-        if (numero == 1){
-            puts("Not Prime");
-            continue;
-        }
-
-        achouDivisor = 0;
-        for (j = 2; j <= sqrt(numero); j++)
-        {
-            if (numero % j == 0){
-                achouDivisor = 1;
-                break;
-            }
-        }
-
-        if (achouDivisor){
-            puts("Not Prime");
+        if (EhPrimo(numero)){
+            puts("Prime");
         }
         else {
-            puts("Prime");
+            puts("Not Prime");
         }
     }
 
