@@ -45,37 +45,30 @@ int main(){
  * Retorno: Quantidade minima de ultrapassagens necessarias (valor >= 0)
 */
 int MinUltrapassagens(int n_comp, int largada[], int chegada[]){
-    int trocou = 1; //Indica se houve troca de posições (ultrapassagens) ou não
     int contador = 0; //Conta o número de ultrapassagens
     int aux;
     int i, j;
 
 
-    while (trocou)
+    int posicao; //Posição do competidor no array de chegada
+    for (i = n_comp-2; i >= 0; i--)
     {
-        trocou = 0;
+        posicao = PosicaoEmArray(chegada, largada[i], n_comp);
 
-        int posicao; //Posição do competidor no array de chegada
-        for (i = n_comp-2; i >= 0; i--)
-        {
-            posicao = PosicaoEmArray(chegada, largada[i], n_comp);
+        if (posicao > i){
 
-            if (posicao > i){
-
-                aux = chegada[posicao];
-                for (j = i; j < posicao; j++){
-                    largada[j] = largada[j+1];
-                    contador++;
-                }
-                largada[j] = aux;
-
-                trocou = 1;
-
-                i = n_comp-1; //Para voltar à posição final (ultimo elemento do array de largada),
-                              //considerando que "i" ainda sera decrementado no laço for
+            aux = chegada[posicao];
+            for (j = i; j < posicao; j++){
+                largada[j] = largada[j+1];
+                contador++;
             }
+            largada[j] = aux;
+
+            i = n_comp-1; //Para voltar à posição final (ultimo elemento do array de largada),
+                            //considerando que "i" ainda sera decrementado no laço for
         }
     }
+
 
     return contador;
 }
